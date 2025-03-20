@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>게임 테스트 페이지</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/effects.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #34495e;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #2c3e50;
+            border-radius: 8px;
+        }
+        
+        .test-section h2 {
+            color: #f1c40f;
+            margin-top: 0;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .test-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .test-result {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #1a2530;
+            border-radius: 5px;
+            color: #ecf0f1;
+            font-family: monospace;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>2D 스타일 SRPG 게임 테스트</h1>
+        
+        <div class="test-section">
+            <h2>API 테스트</h2>
+            <div class="test-buttons">
+                <button class="btn" id="test-new-game">새 게임 생성</button>
+                <button class="btn" id="test-get-game">게임 상태 조회</button>
+                <button class="btn" id="test-end-turn">턴 종료</button>
+            </div>
+            <div class="test-result" id="api-test-result">결과가 여기에 표시됩니다.</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>유닛 테스트</h2>
+            <div class="test-buttons">
+                <button class="btn" id="test-move-unit">유닛 이동</button>
+                <button class="btn" id="test-attack-unit">유닛 공격</button>
+            </div>
+            <div class="test-result" id="unit-test-result">결과가 여기에 표시됩니다.</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>UI 테스트</h2>
+            <div class="test-buttons">
+                <button class="btn" id="test-show-message">메시지 표시</button>
+                <button class="btn" id="test-show-modal">모달 표시</button>
+                <button class="btn" id="test-loading">로딩 표시</button>
+            </div>
+            <div class="test-result" id="ui-test-result">결과가 여기에 표시됩니다.</div>
+        </div>
+        
+        <div class="test-buttons">
+            <a href="/" class="btn">홈으로</a>
+            <a href="/game" class="btn">게임 페이지로</a>
+        </div>
+    </div>
+    
+    <!-- 게임 메시지 -->
+    <div class="game-message" id="game-message"></div>
+    
+    <!-- 게임 결과 모달 -->
+    <div class="modal" id="result-modal">
+        <div class="modal-content">
+            <h2 id="result-title">테스트 모달</h2>
+            <p id="result-message">이것은 테스트 모달입니다.</p>
+            <div class="modal-buttons">
+                <button class="btn" id="close-modal-btn">닫기</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 로딩 인디케이터 -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+    
+    <script>
+        // 전역 변수
+        let gameId = null;
+        
+        // DOM 요소
+        const apiTestResult = document.getElementById('api-test-result');
+        const unitTestResult = document.getElementById('unit-test-result');
+        const uiTestResult = document.getElementById('ui-test-result');
+        const gameMessageElement = document.getElementById('game-message');
+        const resultModal = document.getElementById('result-modal');
+        const loadingElement = document.getElementById('loading');
+        
+        // API 테스트 버튼
+        document.getElementById('test-new-game').addEventListener('click', testNewGame);
+        document.getElementById('test-get-game').addEventListener('click', testGetGame);
+        document.getElementById('test-end-turn').addEventListener('click', testEndTurn);
+        
+        // 유닛 테스트 버튼
+        document.getElementById('test-move-unit').addEventListener('click', testMoveUnit);
+        document.getElementById('test-attack-unit').addEventListener('click', testAttackUnit);
+        
+        // UI 테스트 버튼
+        document.getElementById('test-show-message').addEventListener('click', testShowMessage);
+        document.getElementById('test-show-modal').addEventListener('click', testShowModal);
+        document.getElementById('test-loading').addEventListener('click', testLoading);
+        
+        // 모달 닫기 버튼
+        document.getElementById('close-modal-btn').addEventListener('click', () => {
+            resultModal.classList.remove('show');
+        });
+        
+        // 새 게임 생성 테스트
+        function testNewGame() {
+            fetch('/api/game/new', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                gameId = data.gameId;
+                apiTestResult.innerHTML = `새 게임 생성 성공:<br>게임 ID: ${gameId}<br>메시지: ${data.message}`;
+            })
+            .catch(error => {
+                apiTestResult.innerHTML = `오류 발생: ${error}`;
+            });
+        }
+        
+        // 게임 상태 조회 테스트
+        function testGetGame() {
+            if (!gameId) {
+                apiTestResult.innerHTML = '먼저 새 게임을 생성해주세요.';
+                return;
+            }
+            
+            fetch(`/api/game/${gameId}`)
+            .then(response => response.json())
+            .then(data => {
+                apiTestResult.innerHTML = `게임 상태 조회 성공:<br>플레이어 턴: ${data.playerTurn}<br>플레이어 유닛 수: ${data.playerUnits.length}<br>적 유닛 수: ${data.enemyUnits.length}`;
+            })
+            .catch(error => {
+                apiTestResult.innerHTML = `오류 발생: ${error}`;
+            });
+        }
+        
+        // 턴 종료 테스트
+        function testEndTurn() {
+            if (!gameId) {
+                apiTestResult.innerHTML = '먼저 새 게임을 생성해주세요.';
+                return;
+            }
+            
+            fetch(`/api/game/${gameId}/end-turn`, {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                apiTestResult.innerHTML = `턴 종료 성공:<br>성공 여부: ${data.success}<br>메시지: ${data.message}`;
+            })
+            .catch(error => {
+                apiTestResult.innerHTML = `오류 발생: ${error}`;
+            });
+        }
+        
+        // 유닛 이동 테스트
+        function testMoveUnit() {
+            if (!gameId) {
+                unitTestResult.innerHTML = '먼저 새 게임을 생성해주세요.';
+                return;
+            }
+            
+            // 게임 상태 조회하여 첫 번째 플레이어 유닛 가져오기
+            fetch(`/api/game/${gameId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.playerUnits.length === 0) {
+                    unitTestResult.innerHTML = '플레이어 유닛이 없습니다.';
+                    return;
+                }
+                
+                const unit = data.playerUnits[0];
+                const targetX = unit.x + 1;
+                const targetY = unit.y;
+                
+                // 유닛 이동 요청
+                fetch(`/api/game/${gameId}/move`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `unitId=${unit.id}&targetX=${targetX}&targetY=${targetY}`
+                })
+                .then(response => response.json())
+                .then(moveData => {
+                    unitTestResult.innerHTML = `유닛 이동 테스트:<br>유닛: ${unit.name}<br>이동 위치: (${targetX}, ${targetY})<br>성공 여부: ${moveData.success}<br>메시지: ${moveData.message}`;
+                })
+                .catch(error => {
+                    unitTestResult.innerHTML = `오류 발생: ${error}`;
+                });
+            })
+            .catch(error => {
+                unitTestResult.innerHTML = `오류 발생: ${error}`;
+            });
+        }
+        
+        // 유닛 공격 테스트
+        function testAttackUnit() {
+            if (!gameId) {
+                unitTestResult.innerHTML = '먼저 새 게임을 생성해주세요.';
+                return;
+            }
+            
+            // 게임 상태 조회하여 플레이어 유닛과 적 유닛 가져오기
+            fetch(`/api/game/${gameId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.playerUnits.length === 0 || data.enemyUnits.length === 0) {
+                    unitTestResult.innerHTML = '플레이어 유닛 또는 적 유닛이 없습니다.';
+                    return;
+                }
+                
+                const attackerUnit = data.playerUnits[0];
+                const targetUnit = data.enemyUnits[0];
+                
+                // 유닛 공격 요청
+                fetch(`/api/game/${gameId}/attack`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `attackerUnitId=${attackerUnit.id}&targetUnitId=${targetUnit.id}`
+                })
+                .then(response => response.json())
+                .then(attackData => {
+                    unitTestResult.innerHTML = `유닛 공격 테스트:<br>공격자: ${attackerUnit.name}<br>대상: ${targetUnit.name}<br>성공 여부: ${attackData.success}<br>메시지: ${attackData.message}`;
+                })
+                .catch(error => {
+                    unitTestResult.innerHTML = `오류 발생: ${error}`;
+                });
+            })
+            .catch(error => {
+                unitTestResult.innerHTML = `오류 발생: ${error}`;
+            });
+        }
+        
+        // 메시지 표시 테스트
+        function testShowMessage() {
+            showMessage('이것은 테스트 메시지입니다!', 3000);
+            uiTestResult.innerHTML = '메시지가 표시되었습니다.';
+        }
+        
+        // 모달 표시 테스트
+        function testShowModal() {
+            resultModal.classList.add('show');
+            uiTestResult.innerHTML = '모달이 표시되었습니다.';
+        }
+        
+        // 로딩 표시 테스트
+        function testLoading() {
+            showLoading();
+            uiTestResult.innerHTML = '로딩 인디케이터가 표시되었습니다.';
+            
+            setTimeout(() => {
+                hideLoading();
+                uiTestResult.innerHTML += '<br>로딩 인디케이터가 숨겨졌습니다.';
+            }, 3000);
+        }
+        
+        // 메시지 표시 함수
+        function showMessage(message, duration = 3000) {
+            gameMessageElement.textContent = message;
+            gameMessageElement.classList.add('show');
+            
+            setTimeout(() => {
+                gameMessageElement.classList.remove('show');
+            }, duration);
+        }
+        
+        // 로딩 표시 함수
+        function showLoading() {
+            loadingElement.classList.add('show');
+        }
+        
+        // 로딩 숨기기 함수
+        function hideLoading() {
+            loadingElement.classList.remove('show');
+        }
+    </script>
+</body>
+</html>

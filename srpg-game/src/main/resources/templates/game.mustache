@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/effects.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>2D 스타일 SRPG 게임</h1>
+            <div class="turn-info">
+                <span id="turn-display">플레이어 턴</span>
+                <button id="end-turn-btn">턴 종료</button>
+            </div>
+        </div>
+        
+        <div class="game-content">
+            <div class="game-board" id="game-board">
+                <!-- 게임 보드는 JavaScript로 동적 생성됩니다 -->
+            </div>
+            
+            <div class="game-info">
+                <div class="unit-info" id="unit-info">
+                    <h3>유닛 정보</h3>
+                    <div id="selected-unit-info">
+                        <p>유닛을 선택해주세요</p>
+                    </div>
+                </div>
+                
+                <div class="action-menu" id="action-menu">
+                    <h3>행동</h3>
+                    <button id="move-btn" disabled>이동</button>
+                    <button id="attack-btn" disabled>공격</button>
+                    <button id="cancel-btn" disabled>취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 게임 메시지 -->
+    <div class="game-message" id="game-message"></div>
+    
+    <!-- 게임 결과 모달 -->
+    <div class="modal" id="result-modal">
+        <div class="modal-content">
+            <h2 id="result-title">게임 결과</h2>
+            <p id="result-message"></p>
+            <div class="modal-buttons">
+                <button class="btn" id="new-game-btn">새 게임</button>
+                <button class="btn" id="home-btn">홈으로</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 로딩 인디케이터 -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+    
+    <script src="/js/game.js"></script>
+</body>
+</html>
