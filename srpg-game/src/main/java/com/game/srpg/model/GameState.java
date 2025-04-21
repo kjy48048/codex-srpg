@@ -438,8 +438,8 @@ public class GameState {
         for (int i = 0; i < 4; i++) {
             UnitCard canineInfantryCard = new UnitCard(
                     "견인 보병", "충성스러운 개과 보병", 2, "BEAST_EMPIRE", "canine_infantry.png",
-                    false, UnitType.WARRIOR, 60, 15, 3, 1
-            );
+                    60, 15, 3, 1, UnitType.WARRIOR
+                    );
             canineInfantryCard.addTrait("PACK_TACTICS");
             playerDeck.add(canineInfantryCard);
         }
@@ -447,7 +447,7 @@ public class GameState {
         for (int i = 0; i < 3; i++) {
             UnitCard centaurArcherCard = new UnitCard(
                     "켄타우로스 궁수", "빠르고 정확한 켄타우로스 궁수", 3, "BEAST_EMPIRE", "centaur_archer.png",
-                    false, UnitType.RANGER, 50, 20, 4, 3
+                    50, 20, 4, 3, UnitType.RANGER
             );
             centaurArcherCard.addTrait("RANGED");
             centaurArcherCard.addTrait("SHOOT_AND_MOVE");
@@ -483,14 +483,139 @@ public class GameState {
         playerDeck.add(trainingGroundsCard);
     }
 
-    // 마법사 탑 팩션 카드 추가 (예시)
-    private void addMageTowerCards() {
-        // 임시 구현 (실제 구현 시 확장)
+    /**
+     * 마법사 탑 팩션 카드 추가 메서드 구현
+     *
+     * @param gameState 게임 상태 객체
+     */
+    public static void addMageTowerCards(GameState gameState) {
+        // 군주 카드
+        UnitCard archmageLord = new UnitCard(
+                "대마법사", "마법사 탑의 지도자", 5, "MAGE_TOWER", "archmage_lord.png",
+                120, 25, 3, 4, UnitType.RULER
+        );
+        archmageLord.addTrait("LEADERSHIP");
+        archmageLord.addTrait("SPELLCASTER");
+        gameState.getPlayerDeck().add(archmageLord);
+
+        // 영웅 카드
+        UnitCard elementalMaster = new UnitCard(
+                "원소술사", "자연의 힘을 다루는 마법사", 4, "MAGE_TOWER", "elemental_master.png",
+                90, 30, 3, 3, UnitType.HERO
+        );
+        elementalMaster.addTrait("SPELLCASTER");
+        elementalMaster.addTrait("ELEMENTAL_AFFINITY");
+        gameState.getPlayerDeck().add(elementalMaster);
+
+        // 일반 유닛 카드 - 마법사
+        for (int i = 0; i < 3; i++) {
+            UnitCard mage = new UnitCard(
+                    "견습 마법사", "마법의 기초를 익힌 마법사", 2, "MAGE_TOWER", "apprentice_mage.png",
+                    60, 25, 2, 3, UnitType.RANGER
+            );
+            mage.addTrait("SPELLCASTER");
+            gameState.getPlayerDeck().add(mage);
+        }
+
+        // 일반 유닛 카드 - 골렘
+        for (int i = 0; i < 2; i++) {
+            UnitCard golem = new UnitCard(
+                    "석상 골렘", "마법으로 만들어진 수호자", 3, "MAGE_TOWER", "stone_golem.png",
+                    100, 15, 1, 1, UnitType.WARRIOR
+            );
+            golem.addTrait("CONSTRUCT");
+            golem.addTrait("TAUNT");
+            gameState.getPlayerDeck().add(golem);
+        }
+
+        // 전술 카드 - 화염구
+        TacticCard fireball = new TacticCard(
+                "화염구", "적에게 강력한 화염 피해를 입힙니다", 2, "MAGE_TOWER", "fireball.png",
+                "DAMAGE", 30, 3, 0, false
+        );
+        gameState.getPlayerDeck().add(fireball);
+
+        // 전술 카드 - 마법 방어막
+        TacticCard arcaneBarrier = new TacticCard(
+                "마법 방어막", "아군 유닛에 보호막을 씌웁니다", 2, "MAGE_TOWER", "arcane_barrier.png",
+                "BUFF", 20, 2, 2, false
+        );
+        gameState.getPlayerDeck().add(arcaneBarrier);
+
+        // 건물 카드 - 마법 탑
+        BuildingCard magicTower = new BuildingCard(
+                "마법 탑", "주변 마법사들의 공격력을 강화합니다", 4, "MAGE_TOWER", "magic_tower.png",
+                80, 1, 2, "ATTACK_BONUS", 10
+        );
+        gameState.getPlayerDeck().add(magicTower);
     }
 
-    // 언데드 호드 팩션 카드 추가 (예시)
-    private void addUndeadHordeCards() {
-        // 임시 구현 (실제 구현 시 확장)
+    /**
+     * 언데드 호드 팩션 카드 추가 메서드 구현
+     *
+     * @param gameState 게임 상태 객체
+     */
+    public static void addUndeadHordeCards(GameState gameState) {
+        // 군주 카드
+        UnitCard lichKing = new UnitCard(
+                "리치 왕", "죽음을 초월한 지배자", 5, "UNDEAD_HORDE", "lich_king.png",
+                100, 35, 2, 4, UnitType.RULER
+        );
+        lichKing.addTrait("LEADERSHIP");
+        lichKing.addTrait("UNDEAD");
+        lichKing.addTrait("SPELLCASTER");
+        gameState.getPlayerDeck().add(lichKing);
+
+        // 영웅 카드
+        UnitCard deathKnight = new UnitCard(
+                "죽음의 기사", "어둠의 힘으로 부활한 전사", 4, "UNDEAD_HORDE", "death_knight.png",
+                120, 25, 3, 1, UnitType.HERO
+        );
+        deathKnight.addTrait("UNDEAD");
+        deathKnight.addTrait("CHARGE");
+        gameState.getPlayerDeck().add(deathKnight);
+
+        // 일반 유닛 카드 - 스켈레톤
+        for (int i = 0; i < 4; i++) {
+            UnitCard skeleton = new UnitCard(
+                    "해골 병사", "죽은 자의 뼈로 이루어진 병사", 1, "UNDEAD_HORDE", "skeleton.png",
+                    40, 15, 2, 1, UnitType.WARRIOR
+            );
+            skeleton.addTrait("UNDEAD");
+            gameState.getPlayerDeck().add(skeleton);
+        }
+
+        // 일반 유닛 카드 - 좀비
+        for (int i = 0; i < 3; i++) {
+            UnitCard zombie = new UnitCard(
+                    "좀비", "느리지만 강인한 언데드", 2, "UNDEAD_HORDE", "zombie.png",
+                    70, 10, 1, 1, UnitType.WARRIOR
+            );
+            zombie.addTrait("UNDEAD");
+            zombie.addTrait("RESILIENT");
+            gameState.getPlayerDeck().add(zombie);
+        }
+
+        // 전술 카드 - 죽음의 일격
+        TacticCard deathStrike = new TacticCard(
+                "죽음의 일격", "적에게 치명적인 피해를 입힙니다", 3, "UNDEAD_HORDE", "death_strike.png",
+                "DAMAGE", 40, 2, 0, false
+        );
+        gameState.getPlayerDeck().add(deathStrike);
+
+        // 전술 카드 - 영혼 흡수
+        TacticCard soulDrain = new TacticCard(
+                "영혼 흡수", "적의 생명력을 흡수합니다", 2, "UNDEAD_HORDE", "soul_drain.png",
+                "DRAIN", 20, 2, 0, false
+        );
+        gameState.getPlayerDeck().add(soulDrain);
+
+        // 건물 카드 - 묘지
+        BuildingCard graveyard = new BuildingCard(
+                "묘지", "매 턴마다 스켈레톤을 소환합니다", 3, "UNDEAD_HORDE", "graveyard.png",
+                60, 1, 3, "UNIT_PRODUCTION", 1
+        );
+        gameState.getPlayerDeck().add(graveyard);
     }
 
     // 기본 카드 추가 (예시)
