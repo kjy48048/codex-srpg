@@ -333,7 +333,7 @@ public class GameState {
         // 군주 카드
         UnitCard kingCard = new UnitCard(
                 "인간 왕", "인간 왕국의 군주", 5, "HUMAN_KINGDOM", "king.png",
-                true, UnitType.RULER, 150, 25, 3, 1
+                150, 25, 3, 1, UnitType.RULER
         );
         kingCard.addTrait("LEADERSHIP");
         playerDeck.add(kingCard);
@@ -341,7 +341,7 @@ public class GameState {
         // 영웅 카드
         UnitCard knightCommanderCard = new UnitCard(
                 "기사단장", "왕국 기사단을 이끄는 영웅", 4, "HUMAN_KINGDOM", "knight_commander.png",
-                true, UnitType.HERO, 120, 30, 4, 1
+                120, 30, 4, 1, UnitType.HERO
         );
         knightCommanderCard.addTrait("CHARGE");
         knightCommanderCard.addTrait("INSPIRE");
@@ -351,7 +351,7 @@ public class GameState {
         for (int i = 0; i < 3; i++) {
             UnitCard knightCard = new UnitCard(
                     "왕국 기사", "충성스러운 기사", 3, "HUMAN_KINGDOM", "knight.png",
-                    false, UnitType.WARRIOR, 80, 20, 3, 1
+                    80, 20, 3, 1, UnitType.WARRIOR
             );
             knightCard.addTrait("CHARGE");
             playerDeck.add(knightCard);
@@ -360,7 +360,7 @@ public class GameState {
         for (int i = 0; i < 4; i++) {
             UnitCard footmanCard = new UnitCard(
                     "보병", "왕국의 충직한 보병", 2, "HUMAN_KINGDOM", "footman.png",
-                    false, UnitType.WARRIOR, 60, 15, 2, 1
+                    60, 15, 2, 1, UnitType.WARRIOR
             );
             footmanCard.addTrait("TAUNT");
             playerDeck.add(footmanCard);
@@ -369,7 +369,7 @@ public class GameState {
         for (int i = 0; i < 3; i++) {
             UnitCard archerCard = new UnitCard(
                     "궁수", "숙련된 왕국 궁수", 2, "HUMAN_KINGDOM", "archer.png",
-                    false, UnitType.RANGER, 40, 15, 2, 3
+                    40, 15, 2, 3, UnitType.RANGER
             );
             archerCard.addTrait("RANGED");
             playerDeck.add(archerCard);
@@ -379,27 +379,27 @@ public class GameState {
         for (int i = 0; i < 2; i++) {
             TacticCard rallyCryCard = new TacticCard(
                     "전투 함성", "아군 유닛들의 사기를 높입니다", 2, "HUMAN_KINGDOM", "rally_cry.png",
-                    false, "BUFF", 10, 2, 2, true
+                    "BUFF", 10, 2, 2, true
             );
             playerDeck.add(rallyCryCard);
         }
 
         TacticCard divineProtectionCard = new TacticCard(
                 "신의 가호", "아군 유닛에게 신성한 보호막을 부여합니다", 3, "HUMAN_KINGDOM", "divine_protection.png",
-                false, "BUFF", 0, 0, 3, false
+                "BUFF", 0, 0, 3, false
         );
         playerDeck.add(divineProtectionCard);
 
         // 건물 카드
         BuildingCard castleCard = new BuildingCard(
                 "성", "강력한 방어 요새", 5, "HUMAN_KINGDOM", "castle.png",
-                true, 200, 20, 0, 3, "DEFENSE_BONUS"
+                200, 20, 0, "DEFENSE_BONUS", 3
         );
         playerDeck.add(castleCard);
 
         BuildingCard barracksCard = new BuildingCard(
                 "병영", "유닛을 훈련시키는 건물", 3, "HUMAN_KINGDOM", "barracks.png",
-                false, 100, 5, 1, 2, "UNIT_PRODUCTION"
+                100, 5, 1, "UNIT_PRODUCTION", 2
         );
         playerDeck.add(barracksCard);
     }
@@ -409,7 +409,7 @@ public class GameState {
         // 군주 카드
         UnitCard dragonEmperorCard = new UnitCard(
                 "용황제", "수인 제국의 군주", 5, "BEAST_EMPIRE", "dragon_emperor.png",
-                true, UnitType.RULER, 140, 30, 4, 2
+                140, 30, 4, 2, UnitType.RULER
         );
         dragonEmperorCard.addTrait("FLIGHT");
         dragonEmperorCard.addTrait("LEADERSHIP");
@@ -418,7 +418,7 @@ public class GameState {
         // 영웅 카드
         UnitCard monkeyKingCard = new UnitCard(
                 "원숭이 왕", "전설적인 무술의 달인", 4, "BEAST_EMPIRE", "monkey_king.png",
-                true, UnitType.HERO, 100, 35, 5, 1
+                100, 35, 5, 1, UnitType.HERO
         );
         monkeyKingCard.addTrait("SWIFT");
         monkeyKingCard.addTrait("EVASION");
@@ -428,7 +428,7 @@ public class GameState {
         for (int i = 0; i < 3; i++) {
             UnitCard tigerWarriorCard = new UnitCard(
                     "호랑이 전사", "맹렬한 호랑이 전사", 3, "BEAST_EMPIRE", "tiger_warrior.png",
-                    false, UnitType.WARRIOR, 70, 25, 4, 1
+                    70, 25, 4, 1, UnitType.WARRIOR
             );
             tigerWarriorCard.addTrait("SWIFT");
             tigerWarriorCard.addTrait("FEROCITY");
@@ -458,37 +458,35 @@ public class GameState {
         for (int i = 0; i < 2; i++) {
             TacticCard primalRoarCard = new TacticCard(
                     "원시적 포효", "적 유닛들을 공포에 떨게 합니다", 2, "BEAST_EMPIRE", "primal_roar.png",
-                    false, "DEBUFF", 0, 2, 1, true
+                    "DEBUFF", 0, 2, 1, true
             );
             playerDeck.add(primalRoarCard);
         }
 
         TacticCard wildRageCard = new TacticCard(
                 "야생의 분노", "아군 유닛에게 광폭한 힘을 부여합니다", 3, "BEAST_EMPIRE", "wild_rage.png",
-                false, "BUFF", 15, 0, 2, false
+                "BUFF", 15, 0, 2, false
         );
         playerDeck.add(wildRageCard);
 
         // 건물 카드
         BuildingCard imperialPalaceCard = new BuildingCard(
                 "제국 궁전", "수인 제국의 중심지", 5, "BEAST_EMPIRE", "imperial_palace.png",
-                true, 180, 15, 2, 3, "RESOURCE_GENERATION"
+                180, 15, 2, "RESOURCE_GENERATION", 3
         );
         playerDeck.add(imperialPalaceCard);
 
         BuildingCard trainingGroundsCard = new BuildingCard(
                 "훈련장", "수인 전사들을 훈련시키는 장소", 3, "BEAST_EMPIRE", "training_grounds.png",
-                false, 90, 5, 0, 2, "UNIT_PRODUCTION"
+                90, 5, 0, "UNIT_PRODUCTION", 2
         );
         playerDeck.add(trainingGroundsCard);
     }
 
     /**
      * 마법사 탑 팩션 카드 추가 메서드 구현
-     *
-     * @param gameState 게임 상태 객체
      */
-    public static void addMageTowerCards(GameState gameState) {
+    private void addMageTowerCards() {
         // 군주 카드
         UnitCard archmageLord = new UnitCard(
                 "대마법사", "마법사 탑의 지도자", 5, "MAGE_TOWER", "archmage_lord.png",
@@ -496,7 +494,7 @@ public class GameState {
         );
         archmageLord.addTrait("LEADERSHIP");
         archmageLord.addTrait("SPELLCASTER");
-        gameState.getPlayerDeck().add(archmageLord);
+        playerDeck.add(archmageLord);
 
         // 영웅 카드
         UnitCard elementalMaster = new UnitCard(
@@ -505,7 +503,7 @@ public class GameState {
         );
         elementalMaster.addTrait("SPELLCASTER");
         elementalMaster.addTrait("ELEMENTAL_AFFINITY");
-        gameState.getPlayerDeck().add(elementalMaster);
+        playerDeck.add(elementalMaster);
 
         // 일반 유닛 카드 - 마법사
         for (int i = 0; i < 3; i++) {
@@ -514,7 +512,7 @@ public class GameState {
                     60, 25, 2, 3, UnitType.RANGER
             );
             mage.addTrait("SPELLCASTER");
-            gameState.getPlayerDeck().add(mage);
+            playerDeck.add(mage);
         }
 
         // 일반 유닛 카드 - 골렘
@@ -525,7 +523,7 @@ public class GameState {
             );
             golem.addTrait("CONSTRUCT");
             golem.addTrait("TAUNT");
-            gameState.getPlayerDeck().add(golem);
+            playerDeck.add(golem);
         }
 
         // 전술 카드 - 화염구
@@ -533,29 +531,27 @@ public class GameState {
                 "화염구", "적에게 강력한 화염 피해를 입힙니다", 2, "MAGE_TOWER", "fireball.png",
                 "DAMAGE", 30, 3, 0, false
         );
-        gameState.getPlayerDeck().add(fireball);
+        playerDeck.add(fireball);
 
         // 전술 카드 - 마법 방어막
         TacticCard arcaneBarrier = new TacticCard(
                 "마법 방어막", "아군 유닛에 보호막을 씌웁니다", 2, "MAGE_TOWER", "arcane_barrier.png",
                 "BUFF", 20, 2, 2, false
         );
-        gameState.getPlayerDeck().add(arcaneBarrier);
+        playerDeck.add(arcaneBarrier);
 
         // 건물 카드 - 마법 탑
         BuildingCard magicTower = new BuildingCard(
                 "마법 탑", "주변 마법사들의 공격력을 강화합니다", 4, "MAGE_TOWER", "magic_tower.png",
                 80, 1, 2, "ATTACK_BONUS", 10
         );
-        gameState.getPlayerDeck().add(magicTower);
+        playerDeck.add(magicTower);
     }
 
     /**
      * 언데드 호드 팩션 카드 추가 메서드 구현
-     *
-     * @param gameState 게임 상태 객체
      */
-    public static void addUndeadHordeCards(GameState gameState) {
+    private void addUndeadHordeCards() {
         // 군주 카드
         UnitCard lichKing = new UnitCard(
                 "리치 왕", "죽음을 초월한 지배자", 5, "UNDEAD_HORDE", "lich_king.png",
@@ -564,7 +560,7 @@ public class GameState {
         lichKing.addTrait("LEADERSHIP");
         lichKing.addTrait("UNDEAD");
         lichKing.addTrait("SPELLCASTER");
-        gameState.getPlayerDeck().add(lichKing);
+        playerDeck.add(lichKing);
 
         // 영웅 카드
         UnitCard deathKnight = new UnitCard(
@@ -573,7 +569,7 @@ public class GameState {
         );
         deathKnight.addTrait("UNDEAD");
         deathKnight.addTrait("CHARGE");
-        gameState.getPlayerDeck().add(deathKnight);
+        playerDeck.add(deathKnight);
 
         // 일반 유닛 카드 - 스켈레톤
         for (int i = 0; i < 4; i++) {
@@ -582,7 +578,7 @@ public class GameState {
                     40, 15, 2, 1, UnitType.WARRIOR
             );
             skeleton.addTrait("UNDEAD");
-            gameState.getPlayerDeck().add(skeleton);
+            playerDeck.add(skeleton);
         }
 
         // 일반 유닛 카드 - 좀비
@@ -593,7 +589,7 @@ public class GameState {
             );
             zombie.addTrait("UNDEAD");
             zombie.addTrait("RESILIENT");
-            gameState.getPlayerDeck().add(zombie);
+            playerDeck.add(zombie);
         }
 
         // 전술 카드 - 죽음의 일격
@@ -601,21 +597,21 @@ public class GameState {
                 "죽음의 일격", "적에게 치명적인 피해를 입힙니다", 3, "UNDEAD_HORDE", "death_strike.png",
                 "DAMAGE", 40, 2, 0, false
         );
-        gameState.getPlayerDeck().add(deathStrike);
+        playerDeck.add(deathStrike);
 
         // 전술 카드 - 영혼 흡수
         TacticCard soulDrain = new TacticCard(
                 "영혼 흡수", "적의 생명력을 흡수합니다", 2, "UNDEAD_HORDE", "soul_drain.png",
                 "DRAIN", 20, 2, 0, false
         );
-        gameState.getPlayerDeck().add(soulDrain);
+        playerDeck.add(soulDrain);
 
         // 건물 카드 - 묘지
         BuildingCard graveyard = new BuildingCard(
                 "묘지", "매 턴마다 스켈레톤을 소환합니다", 3, "UNDEAD_HORDE", "graveyard.png",
                 60, 1, 3, "UNIT_PRODUCTION", 1
         );
-        gameState.getPlayerDeck().add(graveyard);
+        playerDeck.add(graveyard);
     }
 
     // 기본 카드 추가 (예시)
@@ -623,23 +619,22 @@ public class GameState {
         // 임시 구현 (실제 구현 시 확장)
     }
 
-    // GameState 클래스의 기존 메서드 (참조용)
+    // 실제 구현된 GameState 메서드
     public int getWidth() {
-        return 10; // 예시 값
+        return this.width;
     }
 
     public int getHeight() {
-        return 10; // 예시 값
+        return this.height;
     }
 
     public Tile getTileAt(int x, int y) {
-        // 실제 구현에서는 GameState의 getTileAt 메서드 호출
-        return null; // 임시 반환값
+        return getTile(x, y);
     }
 
     public Unit getUnitAt(int x, int y) {
-        // 실제 구현에서는 GameState의 getUnitAt 메서드 호출
-        return null; // 임시 반환값
+        Tile tile = getTile(x, y);
+        return (tile != null) ? tile.getUnit() : null;
     }
 
     // Getter와 Setter 메서드

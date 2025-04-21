@@ -1,0 +1,59 @@
+# Java 관련
+*.class
+*.jar
+*.war
+*.ear
+
+# 로그 파일
+*.log
+
+# BlueJ 파일
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Eclipse 관련
+.project
+.classpath
+.settings/
+.loadpath
+
+# IntelliJ IDEA 관련
+.idea/
+*.iml
+*.iws
+out/
+
+# VS Code 관련
+.vscode/
+
+# Gradle 관련
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Maven 관련
+target/
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# STS
+.springBeans
+
+# OS별 임시 파일
+.DS_Store
+Thumbs.db
+
+# 환경설정 파일
+.env
+.env.*
+
+# 테스트 리포트
+test-output/
+surefire-reports/
+
+# Codex CLI 관련
+.codex/
+codex.md
