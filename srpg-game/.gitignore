@@ -5,12 +5,16 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !gradle/wrapper/gradle-wrapper.properties
 
-# IntelliJ IDEA files
+# IntelliJ IDEA 및 기타 툴에서 생성되는 캐시 디렉터리
 .idea/
 .caches/
+caches/
 .daemon/
+daemon/
 .jdks/
+jdks/
 .native/
+native/
 *.iml
 
 # OS generated files
