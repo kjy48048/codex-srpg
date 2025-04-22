@@ -1,7 +1,11 @@
 package com.game.srpg.model;
 
 import java.util.UUID;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Tile {
     private String id;
     private int x;
@@ -19,39 +23,23 @@ public class Tile {
         this.occupiedUnit = null;
     }
 
-    // Getters and Setters
-    public String getId() {
-        return id;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
+    // Lombok @Getter/@Setter로 기본 접근자 생성
     public boolean isWalkable() {
         return walkable && occupiedUnit == null;
     }
 
-    public void setWalkable(boolean walkable) {
-        this.walkable = walkable;
-    }
-
-    public int getMovementCost() {
-        return movementCost;
-    }
-
-    public void setMovementCost(int movementCost) {
-        this.movementCost = movementCost;
-    }
-
+    /**
+     * 현재 타일에 배치된 유닛을 반환합니다.
+     * @return 배치된 Unit 객체, 없으면 null
+     */
     public Unit getUnit() {
         return occupiedUnit;
     }
 
+    /**
+     * 현재 타일에 유닛을 배치하거나 제거합니다.
+     * @param unit 배치할 유닛 객체, null일 경우 제거
+     */
     public void setUnit(Unit unit) {
         this.occupiedUnit = unit;
     }

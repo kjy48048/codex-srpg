@@ -1,13 +1,13 @@
 package com.game.srpg.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Objects;
 
 /**
  * 게임에서 사용되는 모든 카드의 기본 클래스
@@ -18,6 +18,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
         @Type(value = TacticCard.class, name = "TACTIC"),
         @Type(value = BuildingCard.class, name = "BUILDING")
 })
+@Getter
+@Setter
 public abstract class Card {
     private String name;
     private String description;
@@ -53,47 +55,6 @@ public abstract class Card {
      */
     @JsonIgnore
     public abstract CardType getCardType();
-
-    // Getter와 Setter 메서드
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
-    public String getFaction() {
-        return faction;
-    }
-
-    public void setFaction(String faction) {
-        this.faction = faction;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     @Override
     public boolean equals(Object o) {

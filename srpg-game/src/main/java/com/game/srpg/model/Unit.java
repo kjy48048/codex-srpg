@@ -1,7 +1,13 @@
 package com.game.srpg.model;
 
 import java.util.UUID;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class Unit {
     private String id;
     private String name;
@@ -46,79 +52,16 @@ public class Unit {
         this.currentHp = this.maxHp;
     }
 
-    // Getters and Setters
-    public String getId() {
-        return id;
-    }
+    // 기본 접근자(get/set)는 Lombok @Getter/@Setter로 처리
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public UnitType getType() {
-        return type;
-    }
-
-    public int getMaxHp() {
-        return maxHp;
-    }
-
-    public void setMaxHp(int maxHp) {
-        this.maxHp = maxHp;
-    }
-
-    public int getCurrentHp() {
-        return currentHp;
-    }
 
     public void setCurrentHp(int currentHp) {
         this.currentHp = Math.min(currentHp, maxHp);
         this.currentHp = Math.max(this.currentHp, 0);
     }
 
-    public int getAttackPower() {
-        return attackPower;
-    }
-
-    public void setAttackPower(int attackPower) {
-        this.attackPower = attackPower;
-    }
-
-    public int getMoveRange() {
-        return moveRange;
-    }
-
-    public void setMoveRange(int moveRange) {
-        this.moveRange = moveRange;
-    }
-
-    public int getAttackRange() {
-        return attackRange;
-    }
-
-    public void setAttackRange(int attackRange) {
-        this.attackRange = attackRange;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
+    // 나머지 접근자도 Lombok이 생성합니다.
 
     // 유닛 행동 메서드
     public void attack(Unit target) {

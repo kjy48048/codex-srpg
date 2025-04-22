@@ -1,0 +1,46 @@
+# 게임 설정 및 초기 유닛 정보
+game:
+  width: 10
+  height: 10
+  initial-units:
+    - name: "전사"
+      type: WARRIOR
+      x: 1
+      y: 1
+      max-hp: 100
+      attack-power: 20
+      move-range: 3
+      attack-range: 1
+    - name: "궁수"
+      type: ARCHER
+      x: 2
+      y: 2
+      max-hp: 70
+      attack-power: 15
+      move-range: 3
+      attack-range: 3
+    - name: "마법사"
+      type: MAGE
+      x: 3
+      y: 3
+      max-hp: 60
+      attack-power: 25
+      move-range: 2
+      attack-range: 2
+  initial-enemy-units:
+    - name: "적 전사"
+      type: WARRIOR
+      x: 8
+      y: 8
+      max-hp: 100
+      attack-power: 20
+      move-range: 3
+      attack-range: 1
+    - name: "적 궁수"
+      type: ARCHER
+      x: 7
+      y: 7
+      max-hp: 70
+      attack-power: 15
+      move-range: 3
+      attack-range: 3

@@ -1,10 +1,14 @@
 package com.game.srpg.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 전술(마법) 카드 클래스
  */
+@Getter
+@Setter
 public class TacticCard extends Card {
     private String effectType;
     private int effectValue;
@@ -44,46 +48,5 @@ public class TacticCard extends Card {
     @JsonIgnore
     public CardType getCardType() {
         return CardType.TACTIC;
-    }
-
-    // Getter와 Setter 메서드
-    public String getEffectType() {
-        return effectType;
-    }
-
-    public void setEffectType(String effectType) {
-        this.effectType = effectType;
-    }
-
-    public int getEffectValue() {
-        return effectValue;
-    }
-
-    public void setEffectValue(int effectValue) {
-        this.effectValue = effectValue;
-    }
-
-    public int getRange() {
-        return range;
-    }
-
-    public void setRange(int range) {
-        this.range = range;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public boolean isAreaEffect() {
-        return isAreaEffect;
-    }
-
-    public void setAreaEffect(boolean areaEffect) {
-        isAreaEffect = areaEffect;
     }
 }

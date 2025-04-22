@@ -1,10 +1,14 @@
 package com.game.srpg.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 건물 카드 클래스
  */
+@Getter
+@Setter
 public class BuildingCard extends Card {
     private int health;
     private int constructionTime;
@@ -44,46 +48,5 @@ public class BuildingCard extends Card {
     @JsonIgnore
     public CardType getCardType() {
         return CardType.BUILDING;
-    }
-
-    // Getter와 Setter 메서드
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getConstructionTime() {
-        return constructionTime;
-    }
-
-    public void setConstructionTime(int constructionTime) {
-        this.constructionTime = constructionTime;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public String getEffectType() {
-        return effectType;
-    }
-
-    public void setEffectType(String effectType) {
-        this.effectType = effectType;
-    }
-
-    public int getEffectValue() {
-        return effectValue;
-    }
-
-    public void setEffectValue(int effectValue) {
-        this.effectValue = effectValue;
     }
 }

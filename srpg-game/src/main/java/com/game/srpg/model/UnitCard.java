@@ -3,10 +3,14 @@ package com.game.srpg.model;
 import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 유닛 카드 클래스
  */
+@Getter
+@Setter
 public class UnitCard extends Card {
     private int health;
     private int attack;
@@ -14,10 +18,15 @@ public class UnitCard extends Card {
     private int attackRange;
     private UnitType unitType;
     private List<String> traits;
+    /** 여러 개의 특수 능력(기능) 식별자 리스트 */
+    private List<String> abilities;
+    /** 카드 등급(e.g., Common, Rare, Epic 등) */
+    private String grade;
 
     // 기본 생성자 (Jackson 직렬화용)
     public UnitCard() {
         this.traits = new ArrayList<>();
+        this.abilities = new ArrayList<>();
     }
 
     /**
@@ -82,52 +91,5 @@ public class UnitCard extends Card {
         return CardType.UNIT;
     }
 
-    // Getter와 Setter 메서드
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public int getMoveRange() {
-        return moveRange;
-    }
-
-    public void setMoveRange(int moveRange) {
-        this.moveRange = moveRange;
-    }
-
-    public int getAttackRange() {
-        return attackRange;
-    }
-
-    public void setAttackRange(int attackRange) {
-        this.attackRange = attackRange;
-    }
-
-    public UnitType getUnitType() {
-        return unitType;
-    }
-
-    public void setUnitType(UnitType unitType) {
-        this.unitType = unitType;
-    }
-
-    public List<String> getTraits() {
-        return traits;
-    }
-
-    public void setTraits(List<String> traits) {
-        this.traits = traits;
-    }
+    // Lombok @Getter/@Setter가 자동으로 생성합니다.
 }

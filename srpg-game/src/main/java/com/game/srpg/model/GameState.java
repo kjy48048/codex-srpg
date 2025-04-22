@@ -237,35 +237,35 @@ public class GameState {
             drawCardFromDeck();
         }
     }
-
-    // 유닛 배치 가능 여부 확인
-    public boolean canPlaceUnit(int x, int y) {
-        // 맵 범위 확인
-        if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) {
+    
+    // Bounds 체크
+    private boolean isWithinBounds(int x, int y) {
+        return x >= 0 && x < width && y >= 0 && y < height;
+    }
+    
+    // 타일 사용 가능 여부 (맵 내, 비점유)
+    private boolean isTileAvailable(int x, int y) {
+        if (!isWithinBounds(x, y)) {
             return false;
         }
-
-        // 타일 점유 여부 확인
         Tile tile = getTileAt(x, y);
         return tile != null && !tile.isOccupied();
     }
 
+    // 유닛 배치 가능 여부 확인
+    public boolean canPlaceUnit(int x, int y) {
+        return isTileAvailable(x, y);
+    }
+
     // 건물 배치 가능 여부 확인
     public boolean canPlaceBuilding(int x, int y) {
-        // 맵 범위 확인
-        if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) {
-            return false;
-        }
-
-        // 타일 점유 여부 확인
-        Tile tile = getTileAt(x, y);
-        return tile != null && !tile.isOccupied();
+        return isTileAvailable(x, y);
     }
 
     // 전술 카드 사용 가능 여부 확인
     public boolean canUseTactic(int x, int y, TacticCard tacticCard) {
         // 맵 범위 확인
-        if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) {
+        if (!isWithinBounds(x, y)) {
             return false;
         }
 
