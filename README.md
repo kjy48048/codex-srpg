@@ -10,62 +10,61 @@
 - **프론트엔드**: HTML, CSS, JavaScript
 - **템플릿 엔진**: Mustache
 - **통신**: RESTful API, WebSocket
+- **빌드 도구**: Gradle (Gradle Wrapper)
 
 ## 3. 프로젝트 구조
 
-```
-srpg-game/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── game/
-│   │   │           └── srpg/
-│   │   │               ├── config/
-│   │   │               ├── controller/
-│   │   │               ├── model/
-│   │   │               ├── service/
-│   │   │               └── SrpgGameApplication.java
-│   │   └── resources/
-│   │       ├── static/
-│   │       │   ├── css/
-│   │       │   └── js/
-│   │       └── templates/
-└── pom.xml
+```text
+codex-srpg/               # 루트 프로젝트
+├── app/                  # Codex CLI 예제 애플리케이션
+│   └── src/...
+├── srpg-game/            # Spring Boot 기반 SRPG 게임 모듈
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/game/srpg/{config,controller,model,service,SrpgGameApplication.java}
+   │   │   └── resources/{static,templates,game-data.yml}
+│   └── build.gradle
+├── build.gradle          # 멀티프로젝트 빌드 설정
+├── settings.gradle       # 모듈 포함 설정
+├── gradlew*              # Gradle Wrapper
+└── README.md
 ```
 
 ## 4. 설치 및 실행 방법
 
 ### 4.1 필수 요구사항
 
-- Java 17 이상
-- Maven 3.6 이상
+- Java 17 이상 (JAVA_HOME 환경 변수 설정 권장)
+- Gradle Wrapper 사용 (로컬에 Gradle 설치 불필요)
 
 ### 4.2 프로젝트 설치
 
-1. 프로젝트 패키지를 다운로드하고 압축을 해제합니다.
+1. 프로젝트를 Git에서 클론하거나 패키지를 다운로드합니다.
 2. 터미널/명령 프롬프트를 열고 프로젝트 루트 디렉토리로 이동합니다.
 
 ### 4.3 프로젝트 실행
 
-#### Maven을 사용한 실행
+#### Gradle Wrapper를 사용한 실행
 
+빌드 (테스트 생략):
 ```bash
-cd srpg-game
-mvn spring-boot:run
+./gradlew build -x test
 ```
 
-#### JAR 파일 생성 후 실행
-
+스프링 부트 애플리케이션 실행:
 ```bash
-cd srpg-game
-mvn clean package
-java -jar target/srpg-game-0.0.1-SNAPSHOT.jar
+./gradlew :srpg-game:bootRun
+```
+
+또는 JAR 생성 후 실행:
+```bash
+./gradlew :srpg-game:bootJar
+java -jar srpg-game/build/libs/srpg-game-0.0.1-SNAPSHOT.jar
 ```
 
 ### 4.4 애플리케이션 접속
 
-웹 브라우저에서 다음 URL로 접속합니다:
+웹 브라우저에서 접속:
 - 메인 페이지: http://localhost:8080
 - 게임 페이지: http://localhost:8080/game
 - 테스트 페이지: http://localhost:8080/test
@@ -110,29 +109,47 @@ tail -f logs/spring-boot-logger.log
 
 ### 7.1 맵 크기 변경
 
-`GameState.java` 파일에서 생성자의 매개변수를 수정하여 맵 크기를 변경할 수 있습니다:
+`srpg-game/src/main/resources/game-data.yml` 파일에서 아래 항목을 수정하여 맵 크기를 변경할 수 있습니다:
 
-```java
-// GameService.java
-public GameState createNewGame() {
-    GameState gameState = new GameState(10, 10); // 가로, 세로 크기
-    games.put(gameState.getId(), gameState);
-    return gameState;
-}
+```yaml
+game:
+  width: 10   # 맵 가로 크기
+  height: 10  # 맵 세로 크기
+  initial-units:
+    # ...
+  initial-enemy-units:
+    # ...
 ```
+변경 후 애플리케이션을 재시작하면 새로운 크기로 맵이 생성됩니다.
 
 ### 7.2 유닛 속성 변경
 
-`GameState.java` 파일의 `initializeUnits()` 메서드에서 유닛 속성을 수정할 수 있습니다:
+`srpg-game/src/main/resources/game-data.yml` 파일의 `initial-units` 및 `initial-enemy-units` 섹션에서 유닛 속성을 변경할 수 있습니다:
 
-```java
-Unit warrior = new Unit("전사", UnitType.WARRIOR, 1, 1);
-warrior.setMaxHp(100);
-warrior.setCurrentHp(100);
-warrior.setAttackPower(20);
-warrior.setMoveRange(3);
-warrior.setAttackRange(1);
+```yaml
+game:
+  initial-units:
+    - name: "전사"
+      type: WARRIOR
+      x: 1
+      y: 1
+      max-hp: 100
+      attack-power: 20
+      move-range: 3
+      attack-range: 1
+    # ...
+  initial-enemy-units:
+    - name: "적 전사"
+      type: WARRIOR
+      x: 8
+      y: 8
+      max-hp: 100
+      attack-power: 20
+      move-range: 3
+      attack-range: 1
+    # ...
 ```
+변경 후 애플리케이션을 재시작하면 새로운 유닛 구성으로 게임이 시작됩니다.
 
 ## 8. 문제 해결
 
