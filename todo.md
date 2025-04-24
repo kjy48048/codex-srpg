@@ -15,7 +15,7 @@
 - [x] 카드 템플릿용 디렉토리 및 샘플 YAML 추가 (srpg-game/src/main/resources/game-data/templates/*)
   - `srpg-game/src/main/resources/game-data/templates/*.yml`
 - [x] `CardTemplateLoader` 리소스 경로 및 로딩 로직 검증 (빈 템플릿 처리 로직 추가)
-- [ ] `GameState.initializeCardSystem`에 템플릿 로더 통합
+- [x] `GameState.initializeCardSystem`에 템플릿 로더 통합 (카드 덱 초기화 시 로더 사용)
 
 ## 3. GameState 리팩토링
 - [x] 생성자에서 초기 유닛 배치 로직 제거

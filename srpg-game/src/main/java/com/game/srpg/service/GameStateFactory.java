@@ -1,6 +1,7 @@
 package com.game.srpg.service;
 
 import com.game.srpg.config.GameDataProperties;
+import com.game.srpg.config.CardTemplateLoader;
 import com.game.srpg.model.GameState;
 import com.game.srpg.model.Unit;
 import org.springframework.stereotype.Component;
@@ -11,9 +12,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class GameStateFactory {
     private final GameDataProperties dataProps;
+    private final CardTemplateLoader cardTemplateLoader;
 
-    public GameStateFactory(GameDataProperties dataProps) {
+    public GameStateFactory(GameDataProperties dataProps,
+                            CardTemplateLoader cardTemplateLoader) {
         this.dataProps = dataProps;
+        this.cardTemplateLoader = cardTemplateLoader;
     }
 
     /**
@@ -49,6 +53,9 @@ public class GameStateFactory {
             state.getEnemyUnits().add(unit);
             state.getTile(def.getX(), def.getY()).setUnit(unit);
         }
+        // 카드 시스템 초기화 및 템플릿 로딩
+        state.initializeCardSystem();
+        cardTemplateLoader.getTemplates().forEach(state::addCardToDeck);
         return state;
     }
 }
