@@ -24,7 +24,7 @@
 
 ## 4. 테스트 추가
 - [x] `GameStateFactory` 단위 테스트 작성
-- [ ] `GameService` 이동/공격/턴 처리 로직 테스트
+- [x] `GameService` 이동/공격/턴 처리 로직 테스트
 - [ ] REST API 및 WebSocket 컨트롤러 테스트 (`@WebMvcTest`, `@SpringBootTest`)
 
 ## 5. 프론트엔드 개선
