@@ -3,14 +3,16 @@ package com.game.srpg.config;
 import com.game.srpg.model.UnitType;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-
+ 
 import java.util.List;
-
+ 
 /**
  * YAML 기반 게임 초기 데이터 설정
  */
 @Component
+@ConfigurationProperties(prefix = "game")
 @Getter
 @Setter
 public class GameDataProperties {

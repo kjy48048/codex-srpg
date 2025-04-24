@@ -43,3 +43,14 @@ Run the Spring Boot server:
 
 ```bash
 mvn spring-boot:run
+```
+
+## 📝 Development Workflow
+
+This project follows a task-driven workflow managed by the AI assistant:
+
+1. The AI assistant outlines project goals and tasks in `TODO.md`.
+2. The assistant implements each task, updates code, tests, and documentation.
+3. Completed tasks are marked with [x] in `TODO.md`.
+4. The user reviews changes, reports any issues, and the assistant fixes them before moving on.
+5. The cycle repeats until all tasks are completed.

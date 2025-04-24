@@ -20,6 +20,7 @@ import java.util.List;
 @Component
 public class CardTemplateLoader {
     private final List<Card> templates;
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(CardTemplateLoader.class);
 
     public CardTemplateLoader() {
         this.templates = loadTemplates();
@@ -28,11 +29,12 @@ public class CardTemplateLoader {
     private List<Card> loadTemplates() {
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        Resource[] resources;
+        Resource[] resources = new Resource[0];
         try {
             resources = resolver.getResources("classpath:game-data/templates/*.yml");
         } catch (IOException e) {
-            throw new RuntimeException("Failed to load card template resources", e);
+            log.warn("Could not load card template resources from 'classpath:game-data/templates/*.yml', proceeding with empty templates", e);
+            return Collections.emptyList();
         }
         List<Card> list = new ArrayList<>();
         for (Resource res : resources) {
@@ -40,7 +42,7 @@ public class CardTemplateLoader {
                 Card card = mapper.readValue(res.getInputStream(), Card.class);
                 list.add(card);
             } catch (IOException e) {
-                throw new RuntimeException("Failed to parse card template: " + res.getFilename(), e);
+                log.warn("Failed to parse card template: {}", res.getFilename(), e);
             }
         }
         return Collections.unmodifiableList(list);

@@ -11,11 +11,16 @@ import java.util.Map;
 @Service
 public class GameService {
 
+    private final GameStateFactory gameStateFactory;
     private Map<String, GameState> games = new HashMap<>();
 
-    // 새 게임 생성
+    public GameService(GameStateFactory gameStateFactory) {
+        this.gameStateFactory = gameStateFactory;
+    }
+
+    // 새 게임 생성 (GameStateFactory 사용)
     public GameState createNewGame() {
-        GameState gameState = new GameState(10, 10);
+        GameState gameState = gameStateFactory.create();
         games.put(gameState.getId(), gameState);
         return gameState;
     }

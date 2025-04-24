@@ -36,8 +36,9 @@ public class GameState {
         this.enemyUnits = new ArrayList<>();
         this.playerTurn = true;
 
+        // 맵 초기화
         initializeMap();
-        initializeUnits();
+        // 초기 유닛 배치는 GameStateFactory를 통해 수행합니다.
     }
 
     private void initializeMap() {
