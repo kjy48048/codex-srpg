@@ -19,8 +19,8 @@
 
 ## 3. GameState 리팩토링
 - [x] 생성자에서 초기 유닛 배치 로직 제거
-- [ ] 맵 초기화와 유닛 초기화 책임 분리
-- [ ] `GameStateFactory` 사용하도록 서비스 로직 변경
+- [x] 맵 초기화와 유닛 초기화 책임 분리
+- [x] `GameStateFactory` 사용하도록 서비스 로직 변경
 
 ## 4. 테스트 추가
 - [ ] `GameStateFactory` 단위 테스트 작성
