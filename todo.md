@@ -12,7 +12,7 @@
   - `GameState` 생성자 내 고정 초기화 로직 제거
 
 ## 2. 카드 템플릿 로딩
-- [ ] 카드 템플릿용 디렉토리 및 샘플 YAML 추가
+- [x] 카드 템플릿용 디렉토리 및 샘플 YAML 추가 (srpg-game/src/main/resources/game-data/templates/*)
   - `srpg-game/src/main/resources/game-data/templates/*.yml`
 - [x] `CardTemplateLoader` 리소스 경로 및 로딩 로직 검증 (빈 템플릿 처리 로직 추가)
 - [ ] `GameState.initializeCardSystem`에 템플릿 로더 통합

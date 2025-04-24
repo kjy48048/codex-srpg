@@ -1,0 +1,14 @@
+type: UNIT
+name: "왕국 기사"
+description: "충성스러운 왕국의 기병 유닛"
+cost: 3
+faction: "HUMAN_KINGDOM"
+imageUrl: "knight.png"
+health: 80
+attack: 20
+moveRange: 3
+attackRange: 1
+unitType: "WARRIOR"
+traits:
+  - "CHARGE"
+  - "TAUNT"
