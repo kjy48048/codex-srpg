@@ -16,7 +16,7 @@ It features:
 - **Frontend**: HTML, CSS, JavaScript
 - **Template Engine**: Mustache
 - **Communication**: REST API, WebSocket
-+ **Build Tool**: Gradle (via Gradle Wrapper)
+- **Build Tool**: Gradle (via Gradle Wrapper)
 
 ## 🎯 Codex Goals
 
@@ -66,3 +66,6 @@ This project follows a task-driven workflow managed by the AI assistant:
 3. Completed tasks are marked with [x] in `TODO.md`.
 4. The user reviews changes, reports any issues, and the assistant fixes them before moving on.
 5. The cycle repeats until all tasks are completed.
+
+## 🗒️ 추가 지침
+- 설명은 한글로 한다

@@ -556,6 +556,21 @@ function hasEnemyInRange(unit) {
     });
 }
 
+// 초기화 함수: 버튼 이벤트 핸들러 등록 및 초기 상태 설정
+function initGame() {
+    // 이동, 공격, 취소 모드 버튼
+    moveButton.addEventListener('click', startMoveMode);
+    attackButton.addEventListener('click', startAttackMode);
+    cancelButton.addEventListener('click', cancelAction);
+    // 턴 종료 버튼
+    endTurnButton.addEventListener('click', endTurn);
+    // 새 게임, 홈 버튼
+    newGameButton.addEventListener('click', createNewGame);
+    homeButton.addEventListener('click', () => {
+        hideLoading();
+        window.location.href = '/';
+    });
+}
 // 게임 시작
 document.addEventListener('DOMContentLoaded', initGame);
 

@@ -4,14 +4,13 @@ import com.game.srpg.model.UnitType;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
  
 import java.util.List;
+import java.util.ArrayList;
  
 /**
  * YAML 기반 게임 초기 데이터 설정
  */
-@Component
 @ConfigurationProperties(prefix = "game")
 @Getter
 @Setter
@@ -21,9 +20,9 @@ public class GameDataProperties {
     /** 맵 높이 */
     private int height;
     /** 초기 플레이어 유닛 리스트 */
-    private List<UnitDef> initialUnits;
+    private List<UnitDef> initialUnits = new ArrayList<>();
     /** 초기 적 유닛 리스트 */
-    private List<UnitDef> initialEnemyUnits;
+    private List<UnitDef> initialEnemyUnits = new ArrayList<>();
 
     @Getter
     @Setter

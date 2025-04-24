@@ -18,4 +18,13 @@ public class GameController {
         model.addAttribute("title", "게임 플레이");
         return "game";
     }
+    
+    /**
+     * 테스트용 게임 페이지: 로드 시 자동으로 새 게임이 시작됩니다.
+     */
+    @GetMapping("/test-game")
+    public String testGame(Model model) {
+        model.addAttribute("title", "테스트 게임 플레이");
+        return "test-game";
+    }
 }
