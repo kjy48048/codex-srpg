@@ -23,7 +23,7 @@
 - [x] `GameStateFactory` 사용하도록 서비스 로직 변경
 
 ## 4. 테스트 추가
-- [ ] `GameStateFactory` 단위 테스트 작성
+- [x] `GameStateFactory` 단위 테스트 작성
 - [ ] `GameService` 이동/공격/턴 처리 로직 테스트
 - [ ] REST API 및 WebSocket 컨트롤러 테스트 (`@WebMvcTest`, `@SpringBootTest`)
 
