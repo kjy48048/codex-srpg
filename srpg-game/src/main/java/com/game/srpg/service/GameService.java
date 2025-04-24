@@ -209,6 +209,44 @@ public class GameService {
 
         return null;
     }
+    /**
+     * 지정된 유닛의 이동 가능한 타일 목록을 반환합니다.
+     */
+    public java.util.List<Tile> getMoveRange(String gameId, String unitId) {
+        GameState gameState = games.get(gameId);
+        if (gameState == null) {
+            return java.util.Collections.emptyList();
+        }
+        Unit unit = findUnitById(gameState, unitId);
+        if (unit == null) {
+            return java.util.Collections.emptyList();
+        }
+        return gameState.calculateMoveRange(unit);
+    }
+
+    /**
+     * 지정된 유닛의 공격 가능한 타일 목록을 반환합니다.
+     */
+    public java.util.List<Tile> getAttackRange(String gameId, String unitId) {
+        GameState gameState = games.get(gameId);
+        if (gameState == null) {
+            return java.util.Collections.emptyList();
+        }
+        Unit attacker = findUnitById(gameState, unitId);
+        if (attacker == null) {
+            return java.util.Collections.emptyList();
+        }
+        java.util.List<Tile> result = new java.util.ArrayList<>();
+        for (Tile tile : gameState.getTiles().values()) {
+            int dx = Math.abs(tile.getX() - attacker.getX());
+            int dy = Math.abs(tile.getY() - attacker.getY());
+            int distance = dx + dy;
+            if (distance > 0 && distance <= attacker.getAttackRange()) {
+                result.add(tile);
+            }
+        }
+        return result;
+    }
 
     // 이동 범위 내인지 확인
     private boolean isInMoveRange(GameState gameState, Unit unit, int targetX, int targetY) {

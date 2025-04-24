@@ -26,22 +26,6 @@ let selectedUnitId = null;   // 새로 추가
 let highlightedTiles = [];
 let actionMode = null; // 'move', 'attack', null
 
-// 게임 초기화
-function initGame() {
-    // 로딩 표시
-    showLoading();
-
-    // 새 게임 생성
-    createNewGame();
-
-    // 이벤트 리스너 등록
-    endTurnButton.addEventListener('click', endTurn);
-    moveButton.addEventListener('click', startMoveMode);
-    attackButton.addEventListener('click', startAttackMode);
-    cancelButton.addEventListener('click', cancelAction);
-    newGameButton.addEventListener('click', createNewGame);
-    homeButton.addEventListener('click', () => window.location.href = '/');
-}
 
 // 로딩 표시
 function showLoading() {
@@ -574,3 +558,38 @@ function hasEnemyInRange(unit) {
 
 // 게임 시작
 document.addEventListener('DOMContentLoaded', initGame);
+
+// 네임스페이스에 기능 모듈화
+window.GameApp = {
+    api: {
+        createNewGame: createNewGame,
+        fetchGameState: fetchGameState,
+        move: handleMoveAction,
+        attack: handleAttackAction,
+        endTurn: endTurn
+    },
+    util: {
+        calculateMoveRange: calculateMoveRange,
+        isInAttackRange: isInAttackRange,
+        hasEnemyInRange: hasEnemyInRange,
+        canMoveUnit: canMoveUnit,
+        canAttackUnit: canAttackUnit
+    },
+    ui: {
+        showLoading: showLoading,
+        hideLoading: hideLoading,
+        showMessage: showMessage,
+        showResultModal: showResultModal,
+        displayUnitInfo: displayUnitInfo,
+        updateTurnDisplay: updateTurnDisplay,
+        updateActionButtons: updateActionButtons,
+        renderGameBoard: renderGameBoard
+    },
+    actions: {
+        handleTileClick: handleTileClick,
+        startMoveMode: startMoveMode,
+        startAttackMode: startAttackMode,
+        cancelAction: cancelAction
+    },
+    init: initGame
+};

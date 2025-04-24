@@ -16,7 +16,7 @@ It features:
 - **Frontend**: HTML, CSS, JavaScript
 - **Template Engine**: Mustache
 - **Communication**: REST API, WebSocket
-- **Build Tool**: Maven
++ **Build Tool**: Gradle (via Gradle Wrapper)
 
 ## 🎯 Codex Goals
 
@@ -39,10 +39,22 @@ When working in this repository, prioritize the following:
 
 ## 🧪 Useful Commands
 
-Run the Spring Boot server:
+Run the Spring Boot server (Gradle):
 
 ```bash
-mvn spring-boot:run
+./gradlew :srpg-game:bootRun
+```
+
+Build the project, skipping tests:
+
+```bash
+./gradlew build -x test
+```
+
+Run tests (requires JAVA_HOME or valid java on PATH):
+
+```bash
+./gradlew test
 ```
 
 ## 📝 Development Workflow

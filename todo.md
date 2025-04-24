@@ -25,12 +25,12 @@
 ## 4. 테스트 추가
 - [x] `GameStateFactory` 단위 테스트 작성
 - [x] `GameService` 이동/공격/턴 처리 로직 테스트
-- [ ] REST API 및 WebSocket 컨트롤러 테스트 (`@WebMvcTest`, `@SpringBootTest`)
+- [x] REST API 및 WebSocket 컨트롤러 테스트 (`@WebMvcTest`, `@SpringBootTest`)
 
 ## 5. 프론트엔드 개선
-- [ ] 동적 맵 크기 지원 (10×10 하드코딩 제거)
-- [ ] 서버-클라이언트 간 이동/공격 범위 계산 일관성 검증
-- [ ] `game.js` 모듈화 및 리팩토링
+- [x] 동적 맵 크기 지원 (10×10 하드코딩 제거)
+- [x] 서버-클라이언트 간 이동/공격 범위 계산 일관성 검증
+- [x] `game.js` 모듈화 및 리팩토링
 
 ## 6. 문서화 및 기타
 - [ ] README 업데이트 (빌드/실행 가이드, 아키텍처 개요)
