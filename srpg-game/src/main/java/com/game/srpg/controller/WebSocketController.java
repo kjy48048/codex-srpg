@@ -13,8 +13,11 @@ import java.util.Map;
 @Controller
 public class WebSocketController {
 
-    @Autowired
-    private GameService gameService;
+    private final GameService gameService;
+
+    public WebSocketController(GameService gameService) {
+        this.gameService = gameService;
+    }
     
     @MessageMapping("/game.update")
     @SendTo("/topic/game")
